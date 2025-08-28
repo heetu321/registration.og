@@ -16,7 +16,7 @@
     }
 
     .container {
-      background: rgba(0, 0, 0, 0.5); /* transparent dark effect (no blur) */
+      background: rgba(0, 0, 0, 0.5);
       padding: 35px;
       border-radius: 20px;
       box-shadow: 0 6px 30px rgba(0,0,0,0.4);
@@ -31,7 +31,6 @@
       margin: 0 auto 15px;
     }
 
-    /* Headline */
     .headline {
       font-size: 26px;
       font-weight: 900;
@@ -43,7 +42,6 @@
       text-shadow: 0 0 10px rgba(212,175,55,0.6);
     }
 
-    /* Sub-headline */
     .sub {
       font-size: 15px;
       font-weight: 600;
@@ -94,6 +92,12 @@
       background: linear-gradient(135deg, #0056b3, #003f88);
     }
 
+    .pay-btn.disabled {
+      background: #999;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
     .qr-box {
       margin-top: 20px;
       color: #fff;
@@ -112,18 +116,28 @@
       color: #28a745;
       font-weight: 600;
     }
+
+    .notice {
+      font-size: 14px;
+      color: #ffcc00;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <img src="your-logo.png" alt="Logo" class="logo">
 
-    <!-- Headline + Sub -->
     <div class="headline">Get a Chance to Win ₹1,00,000!</div>
     <div class="sub">MrBeast Game Registration Form</div>
 
     <h2>Register & Pay ₹100</h2>
-    
+
+    <!-- Instructions -->
+    <p style="color:#fff; font-size: 14px; margin-top: 0; margin-bottom: 10px;">
+      📱 <strong>UPI payments only.</strong> Use Google Pay, PhonePe, Paytm, etc.
+    </p>
+
     <form>
       <label for="name">Full Name</label>
       <input type="text" id="name" placeholder="Enter your full name" required>
@@ -134,17 +148,37 @@
       <label for="phone">Phone Number</label>
       <input type="tel" id="phone" placeholder="Enter your phone number" required>
 
-      <a href="upi://pay?pa=8469626550@fam&pn=mrbeast&am=100&cu=INR" class="pay-btn">
+      <!-- UPI Link -->
+      <a href="upi://pay?pa=8469626550@fam&pn=mrbeast&am=100&cu=INR" class="pay-btn" id="upiPayBtn">
         Pay ₹100 & Register
       </a>
+
+      <!-- Desktop Notice -->
+      <p class="notice" id="deviceWarning" style="display: none;">
+        ⚠️ UPI payments can only be done via mobile apps. Please open this page on your phone.
+      </p>
     </form>
 
     <div class="qr-box">
       <p>Or scan to pay:</p>
-      <img src="your-qr.png" alt="UPI QR">
+      <img src="Screenshot_20250828_145709_Chrome~2.jpg" alt="UPI QR">
     </div>
 
     <div class="secure">🔒 Secure UPI Payment</div>
   </div>
+
+  <script>
+    // Device check for mobile
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    const upiBtn = document.getElementById('upiPayBtn');
+    const warning = document.getElementById('deviceWarning');
+
+    if (!isMobile) {
+      upiBtn.classList.add('disabled');
+      upiBtn.removeAttribute('href');
+      upiBtn.innerText = 'Open on Mobile to Pay via UPI';
+      warning.style.display = 'block';
+    }
+  </script>
 </body>
 </html>
